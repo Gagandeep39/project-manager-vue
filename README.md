@@ -1,24 +1,13 @@
-# project-viewer-vue
+# Project Viewer
 
-## Project setup
-```
-yarn install
-```
+- [Project Viewer](#project-viewer)
+  - [Deployment](#deployment)
+  - [Description](#description)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Deployment
 
-### Compiles and minifies for production
-```
-yarn build
-```
+- Checkout deployment at <https://gagandeep39.github.io/project-viewer-vue/>
 
-### Lints and fixes files
-```
-yarn lint
-```
+## Description
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- A composition API based Vue Application
