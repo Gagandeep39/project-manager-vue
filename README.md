@@ -250,6 +250,7 @@ export default {
 - Accessing props inside a component
 
 ```js
+props: ['userName'], ['age'],
 setup(props) {
     const combination = computed(() => props.userName + ' ' + props.age);
     return {
