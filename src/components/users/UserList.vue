@@ -26,8 +26,9 @@
 </template>
 
 <script>
-import { watch, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import UserItem from './UserItem.vue';
+import useSearch from '../../hooks/search';
 
 export default {
   components: {
@@ -36,40 +37,24 @@ export default {
   props: ['users'],
   emits: ['list-projects'],
   setup(props) {
+    // Hook
+
+    const {
+      enteredSearchTerm,
+      updateSearch,
+      availableItems: availableUsers,
+    } = useSearch(props.users, 'fullName');
+
     // References
-    const enteredSearchTerm = ref('');
-    const activeSearchTerm = ref('');
     const sorting = ref(null);
 
     // Methods
-    function updateSearch(val) {
-      enteredSearchTerm.value = val;
-    }
     function sort(mode) {
       sorting.value = mode;
     }
 
     // Watchers
-    watch(enteredSearchTerm, (val) => {
-      setTimeout(() => {
-        if (val === enteredSearchTerm.value) {
-          activeSearchTerm.value = val;
-        }
-      }, 300);
-    });
 
-    // Computes
-    const availableUsers = computed(() => {
-      let users = [];
-      if (activeSearchTerm.value) {
-        users = props.users.filter((usr) =>
-          usr.fullName.includes(activeSearchTerm.value)
-        );
-      } else if (users) {
-        users = props.users;
-      }
-      return users;
-    });
     const displayedUsers = computed(() => {
       if (!sorting.value) {
         return availableUsers.value;
@@ -86,11 +71,11 @@ export default {
         }
       });
     });
+
     return {
       updateSearch,
       sort,
       enteredSearchTerm,
-      activeSearchTerm,
       sorting,
       availableUsers,
       displayedUsers,
